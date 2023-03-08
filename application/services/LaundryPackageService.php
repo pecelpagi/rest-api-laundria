@@ -80,8 +80,9 @@ class LaundryPackageService extends RestController {
         $payload = $this->create_limit_offset_data($service);
         $limit = $payload->limit;
         $offset = $payload->offset;
+        $search = $this->get("search");
 
-        $data = $this->laundry_package->get_all_data($limit, $offset);
+        $data = $this->laundry_package->get_all_data($limit, $offset, $search);
 
         return $data;
     }
