@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.40, for Linux (x86_64)
 --
--- Host: localhost    Database: db_laundria
+-- Host: 191.101.2.237    Database: db_laundria
 -- ------------------------------------------------------
--- Server version	5.7.40-0ubuntu0.18.04.1
+-- Server version	5.7.41
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -55,7 +55,7 @@ CREATE TABLE `Customers` (
   `addr` text NOT NULL,
   `phone` char(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `Customers` (
 
 LOCK TABLES `Customers` WRITE;
 /*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
-INSERT INTO `Customers` VALUES (1,'Customer A','Jl. Kenanga No. 28','085634111765'),(2,'Heri Wahyudi','Jl. Agus Salim No.32','085645781329'),(3,'Suyono','Jl. Agus Salim Gg. II No. 23','085645786123'),(12,'Ridwan','Jl. Wukir No. 11','085436781649'),(13,'Test Tambah','Jl. Kenanga No. 28','085634111765');
+INSERT INTO `Customers` VALUES (1,'Customer A','Jl. Kenanga No. 28','085634111765'),(2,'Heri Wahyudi','Jl. Agus Salim No.32','085645781329'),(3,'Suyono','Jl. Agus Salim Gg. II No. 23','085645786123'),(12,'Ridwan','Jl. Wukir No. 11','085436781649'),(13,'Test Tambah','Jl. Kenanga No. 28','085634111765'),(14,'Efendi Malik','Jl. Bromo No. 21','085678123511'),(15,'Ayu Rahma','Jl. Bromo No.11','085724817115'),(16,'Dina Rizky','Jl. Semeru No. 5','085732811776');
 /*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-04 14:46:02
+-- Dump completed on 2023-03-05 15:18:49
