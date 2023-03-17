@@ -132,10 +132,11 @@ class SaleService extends RestController {
 
         if (!$this->get($PARAM_KEY::LIMIT)) { return 0; }
 
+        $search = $this->get(CommonConstant::SEARCH);
         $order_status = $this->get("order_status");
 
-        $total_data = $this->sale->get_total_all_data($order_status);
-        $total_pages = ceil($total_data / $service->get($PARAM_KEY::LIMIT));
+        $total_data = $this->sale->get_total_all_data($order_status, $search);
+        $total_pages = ceil($total_data / $this->get($PARAM_KEY::LIMIT));
 
         return $total_pages;
     }

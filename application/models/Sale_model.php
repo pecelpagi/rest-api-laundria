@@ -69,7 +69,7 @@ class Sale_model extends CI_model {
         return $query->result();
     }
 
-    public function get_total_all_data($order_status = NULL) {
+    public function get_total_all_data($order_status = NULL, $search = NULL) {
         $this->db->select('Sales.*');
         $this->db->from('Sales');
         $this->db->join('Customers', 'Customers.id = Sales.customer_id');

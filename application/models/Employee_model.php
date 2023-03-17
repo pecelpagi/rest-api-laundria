@@ -64,7 +64,7 @@ class Employee_model extends CI_Model {
         return $this->get_all_data($limit, $offset, $search);
     }
 
-    public function get_total_all_data($except_id = NULL, $search) {
+    public function get_total_all_data($except_id = NULL, $search = NULL) {
         if ($search) { $this->db->where("LOWER(fullname) LIKE LOWER('%{$search}%')"); }
         if ($except_id) { $this->db->where('id !=', $except_id); }
         
