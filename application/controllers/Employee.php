@@ -40,7 +40,7 @@ class Employee extends CoreController {
 
 		try {
 			$employee = $this->employee_service->create_data();
-			$this->set_successful_response("Create employee success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -51,7 +51,7 @@ class Employee extends CoreController {
 
 		try {
 			$employee = $this->employee_service->update_data();
-			$this->set_successful_response("Update employee success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -64,7 +64,7 @@ class Employee extends CoreController {
 			if (!$key) { throw new Error("Employee ID is required"); }
 
 			$employee = $this->employee_service->delete_data($key);
-			$this->set_successful_response("Delete employee success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}

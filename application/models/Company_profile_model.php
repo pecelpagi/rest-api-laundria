@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once APPPATH . 'constants/CompanyProfileColumnConstant.php';
+require_once APPPATH . 'constants/ColumnConstant.php';
 
 class Company_profile_model extends CI_model {
     private $table_name;
@@ -22,18 +22,18 @@ class Company_profile_model extends CI_model {
         return $query->row(0);
     }
 
-    public function update_data($service) {
-        $COLUMN_KEY = 'CompanyProfileColumnConstant';
-        $id = $service->put($COLUMN_KEY::ID);
-        
-        $data = array(
-            $COLUMN_KEY::NAME => $service->put($COLUMN_KEY::NAME),
-            $COLUMN_KEY::ADDR => $service->put($COLUMN_KEY::ADDR),
-            $COLUMN_KEY::PHONE => $service->put($COLUMN_KEY::PHONE),
-            $COLUMN_KEY::EMAIL => $service->put($COLUMN_KEY::EMAIL),
-        );
+    public function update_data($form_data) {
+        $COLUMN_KEY = 'ColumnConstant\CompanyProfile';
 
-        $this->db->where('id', $id);
+        $id = $form_data[$COLUMN_KEY::ID];
+
+        $filtered_form_data = array_filter(array_keys($form_data), fn($x) => ($x !== $COLUMN_KEY::ID));
+
+        $data = array();
+
+        foreach ($filtered_form_data as $key) { $data[$key] = $form_data[$key]; }
+
+        $this->db->where($COLUMN_KEY::ID, $id);
         $this->db->update($this->table_name, $data);
     }
 }

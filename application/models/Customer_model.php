@@ -1,20 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once APPPATH . 'constants/CustomerColumnConstant.php';
+require_once APPPATH . 'constants/ColumnConstant.php';
 
 class Customer_model extends CI_model {
     private $table_name;
     
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
 		$this->table_name = 'Customers';
 	}
 
-    public function get_one_data_by($column, $value)
-    {
+    public function get_one_data_by($column, $value) {
         $this->db->where($column, $value);
+        
         $query = $this->db->get($this->table_name);
         $results = $query->result();
 
@@ -25,7 +24,6 @@ class Customer_model extends CI_model {
 
     public function get_all_data($limit = NULL, $offset = 0, $search) {
         if ($search) { $this->db->where("LOWER(fullname) LIKE LOWER('%{$search}%')"); }
-
         if ($limit) { $this->db->limit($limit); }
     
         $this->db->offset($offset);
@@ -35,38 +33,35 @@ class Customer_model extends CI_model {
         return $query->result();
     }
 
-    public function get_total_all_data() {
+    public function get_total_all_data($search) {
+        if ($search) { $this->db->where("LOWER(fullname) LIKE LOWER('%{$search}%')"); }
+
         return $this->db->count_all_results($this->table_name);
     }
 
-    public function insert_data($service) {
-        $COLUMN_KEY = 'CustomerColumnConstant';
-
-        $data = array(
-            $COLUMN_KEY::FULLNAME => $service->post($COLUMN_KEY::FULLNAME),
-            $COLUMN_KEY::ADDR => $service->post($COLUMN_KEY::ADDR),
-            $COLUMN_KEY::PHONE => $service->post($COLUMN_KEY::PHONE),
-        );
-
-        $this->db->insert($this->table_name, $data);
+    public function insert_data($form_data) {
+        $this->db->insert($this->table_name, $form_data);
     }
 
-    public function update_data($service) {
-        $COLUMN_KEY = 'CustomerColumnConstant';
-        $id = $service->put($COLUMN_KEY::ID);
-        
-        $data = array(
-            $COLUMN_KEY::FULLNAME => $service->put($COLUMN_KEY::FULLNAME),
-            $COLUMN_KEY::ADDR => $service->put($COLUMN_KEY::ADDR),
-            $COLUMN_KEY::PHONE => $service->put($COLUMN_KEY::PHONE),
-        );
+    public function update_data($form_data) {
+        $COLUMN_KEY = 'ColumnConstant\Customer';
 
-        $this->db->where('id', $id);
+        $id = $form_data[$COLUMN_KEY::ID];
+
+        $filtered_form_data = array_filter(array_keys($form_data), fn($x) => ($x !== $COLUMN_KEY::ID));
+
+        $data = array();
+
+        foreach ($filtered_form_data as $key) { $data[$key] = $form_data[$key]; }
+
+        $this->db->where($COLUMN_KEY::ID, $id);
         $this->db->update($this->table_name, $data);
     }
 
     public function delete_data($id) {
-        $this->db->where('id', $id);
+        $COLUMN_KEY = 'ColumnConstant\Customer';
+
+        $this->db->where($COLUMN_KEY::ID, $id);
         $this->db->delete($this->table_name);
     }
 }

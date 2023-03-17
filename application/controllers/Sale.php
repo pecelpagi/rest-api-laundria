@@ -29,8 +29,8 @@ class Sale extends CoreController {
 		try {
 			if ($id) { $this->get_one_data($id); }
 
-			$sales = $this->sale_service->get_all_data($this);
-			$total_pages = $this->sale_service->get_total_pages($this);
+			$sales = $this->sale_service->get_all_data();
+			$total_pages = $this->sale_service->get_total_pages();
 
 			$additional_data = [
 				'meta' => [
@@ -49,7 +49,7 @@ class Sale extends CoreController {
 
 		try {
 			$this->sale_service->create_data();
-			$this->set_successful_response("Create order success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -60,7 +60,7 @@ class Sale extends CoreController {
 
 		try {
 			$this->sale_service->update_data();
-			$this->set_successful_response("Update order success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -70,10 +70,8 @@ class Sale extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			if (!$key) { throw new Error("Order ID is required"); }
-
 			$this->sale_service->delete_data($key);
-			$this->set_successful_response("Delete order success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -83,7 +81,7 @@ class Sale extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$data = $this->sale_service->get_data_by_range_date($this);
+			$data = $this->sale_service->get_data_by_range_date();
 			$this->set_successful_response($data);
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());

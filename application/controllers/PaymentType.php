@@ -37,7 +37,7 @@ class PaymentType extends CoreController {
 
 		try {
 			$this->payment_type_service->create_data();
-			$this->set_successful_response("Create payment type success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -48,7 +48,7 @@ class PaymentType extends CoreController {
 
 		try {
 			$this->payment_type_service->update_data();
-			$this->set_successful_response("Update payment type success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -58,10 +58,8 @@ class PaymentType extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			if (!$key) { throw new Error("Payment type ID is required"); }
-
 			$this->payment_type_service->delete_data($key);
-			$this->set_successful_response("Delete payment type success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}

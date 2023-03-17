@@ -36,8 +36,8 @@ class LaundryPackage extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$laundry_package = $this->laundry_package_service->create_data();
-			$this->set_successful_response("Create laundry package success");
+			$this->laundry_package_service->create_data();
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -47,8 +47,8 @@ class LaundryPackage extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$laundry_package = $this->laundry_package_service->update_data();
-			$this->set_successful_response("Update laundry package success");
+			$this->laundry_package_service->update_data();
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -58,10 +58,8 @@ class LaundryPackage extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			if (!$key) { throw new Error("Laundry package ID is required"); }
-
-			$laundry_package = $this->laundry_package_service->delete_data($key);
-			$this->set_successful_response("Delete laundry package success");
+			$this->laundry_package_service->delete_data($key);
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}

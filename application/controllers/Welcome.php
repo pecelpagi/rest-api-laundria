@@ -64,7 +64,7 @@ class Welcome extends CoreController {
 
 		try {
 			$this->company_profile_service->update_data();
-			$this->set_successful_response("Update company profile success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}

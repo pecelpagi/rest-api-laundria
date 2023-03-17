@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once APPPATH . 'constants/CustomerColumnConstant.php';
+require_once APPPATH . 'constants/ColumnConstant.php';
+require_once APPPATH . 'constants/CommonConstant.php';
 
 use chriskacerguis\RestServer\RestController;
 
@@ -11,90 +12,93 @@ class CustomerService extends RestController {
     {
         parent::__construct();
 
-        $this->load->helper('form');
+        $this->load->helper('api_service');
         $this->load->library('form_validation');
         $this->load->model('customer_model', 'customer');
     }
 
     public function create_data() {
-        $PARAM_KEY = 'CustomerColumnConstant';
+        $PARAM_KEY = 'ColumnConstant\Customer';
+        $column_constant_keys = get_column_constant_keys_from_class($PARAM_KEY);
 
-        $reflector = new ReflectionClass($PARAM_KEY);
-        $constants = $reflector->getConstants();
+        $form_data = $this->post();
 
-        foreach($constants as $constant) {
-            if ($constant === $PARAM_KEY::ID) continue;
+        is_form_data_valid($form_data, $column_constant_keys);
 
-            $this->form_validation->set_rules($constant, $constant, 'required');
+        $this->form_validation->set_data($form_data);
+
+        foreach($column_constant_keys as $key) {
+            if ($key === $PARAM_KEY::ID) continue;
+
+            $this->form_validation->set_rules($key, $key, 'required');
         }
 
         if ($this->form_validation->run() === FALSE) { throw new Exception(validation_errors_text()); }
 
-        $this->customer->insert_data($this);
+        $this->customer->insert_data($form_data);
     }
 
     public function update_data() {
-        $PARAM_KEY = 'CustomerColumnConstant';
+        $column_constant_keys = get_column_constant_keys_from_class('ColumnConstant\Customer');
 
-        $reflector = new ReflectionClass($PARAM_KEY);
-        $constants = $reflector->getConstants();
+        $form_data = $this->put();
+
+        is_form_data_valid($form_data, $column_constant_keys);
 
         $this->form_validation->set_data($this->put());
 
-        foreach($constants as $constant) { $this->form_validation->set_rules($constant, $constant, 'required'); }
+        foreach($column_constant_keys as $key) { $this->form_validation->set_rules($key, $key, 'required'); }
 
         if ($this->form_validation->run() === FALSE) { throw new Exception(validation_errors_text()); }
 
-        $this->customer->update_data($this);
+        $this->customer->update_data($form_data);
     }
 
     public function delete_data($id) {
+        if (!$id) { throw new Error("Customer ID is required"); }
+
         $this->customer->delete_data($id);
     }
 
-    private function create_limit_offset_data($service) {
-        $PARAM_KEY = (object)[];
-        $PARAM_KEY->PAGE = "page";
-        $PARAM_KEY->LIMIT = "limit";
+    private function create_limit_offset_data() {
+        $PARAM_KEY = 'CommonConstant';
 
         $limit = NULL;
         $offset = 0;
 
-        if ($service->get($PARAM_KEY->PAGE) && $service->get($PARAM_KEY->LIMIT)) {
-            $limit = (int) $this->get($PARAM_KEY->LIMIT);
-            $page = (int) $this->get($PARAM_KEY->PAGE);
+        if ($this->get($PARAM_KEY::PAGE) && $this->get($PARAM_KEY::LIMIT)) {
+            $limit = (int) $this->get($PARAM_KEY::LIMIT);
+            $page = (int) $this->get($PARAM_KEY::PAGE);
             
             $offset = $limit * ($page - 1);
-        } else if ($PARAM_KEY->LIMIT) {
-            $limit = (int) $this->get($PARAM_KEY->LIMIT);
-        }
+        } else if ($PARAM_KEY::LIMIT) { $limit = (int) $this->get($PARAM_KEY::LIMIT); }
 
-        $retval = (object)[];
-        $retval->limit = $limit;
-        $retval->offset = $offset;
+        $retval = array();
+        $retval[$PARAM_KEY::LIMIT] = $limit;
+        $retval[$PARAM_KEY::OFFSET] = $offset;
         
         return $retval;
     }
 
-    public function get_all_data($service) {
-        $payload = $this->create_limit_offset_data($service);
-        $limit = $payload->limit;
-        $offset = $payload->offset;
-        $search = $this->get("search");
+    public function get_all_data() {
+        extract($this->create_limit_offset_data());
+        
+        $search = $this->get(CommonConstant::SEARCH);
 
         $data = $this->customer->get_all_data($limit, $offset, $search);
 
         return $data;
     }
 
-    public function get_total_pages($service) {
-        $PARAM_KEY = (object)[];
-        $PARAM_KEY->LIMIT = "limit";
+    public function get_total_pages() {
+        $PARAM_KEY = 'CommonConstant';
 
-        if (!$service->get($PARAM_KEY->LIMIT)) { return 0; }
+        if (!$this->get($PARAM_KEY::LIMIT)) { return 0; }
 
-        $total_data = $this->customer->get_total_all_data();
-        $total_pages = ceil($total_data / $service->get($PARAM_KEY->LIMIT));
+        $search = $this->get($PARAM_KEY::SEARCH);
+
+        $total_data = $this->customer->get_total_all_data($search);
+        $total_pages = ceil($total_data / $this->get($PARAM_KEY::LIMIT));
 
         return $total_pages;
     }

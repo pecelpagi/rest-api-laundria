@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once APPPATH . 'constants/PaymentTypeColumnConstant.php';
+require_once APPPATH . 'constants/ColumnConstant.php';
 
 class Payment_type_model extends CI_model {
     private $table_name;
@@ -12,8 +12,7 @@ class Payment_type_model extends CI_model {
 		$this->table_name = 'PaymentTypes';
 	}
 
-    public function get_one_data_by($column, $value)
-    {
+    public function get_one_data_by($column, $value) {
         $this->db->where($column, $value);
         $query = $this->db->get($this->table_name);
         $results = $query->result();
@@ -25,7 +24,6 @@ class Payment_type_model extends CI_model {
 
     public function get_all_data($limit = NULL, $offset = 0, $search) {
         if ($search) { $this->db->where("LOWER(name) LIKE LOWER('%{$search}%')"); }
-
         if ($limit) { $this->db->limit($limit); }
     
         $this->db->offset($offset);
@@ -35,48 +33,35 @@ class Payment_type_model extends CI_model {
         return $query->result();
     }
 
-    public function get_total_all_data() {
+    public function get_total_all_data($search) {
+        if ($search) { $this->db->where("LOWER(name) LIKE LOWER('%{$search}%')"); }
+        
         return $this->db->count_all_results($this->table_name);
     }
 
-    public function insert_data($service) {
-        $COLUMN_KEY = 'PaymentTypeColumnConstant';
-
-        $reflector = new ReflectionClass($COLUMN_KEY);
-        $constants = $reflector->getConstants();
-
-        $data = array();
-
-        foreach($constants as $constant) {
-            if ($constant === $COLUMN_KEY::ID) continue;
-
-            $data[$constant] = $service->post($constant);
-        }
-
-        $this->db->insert($this->table_name, $data);
+    public function insert_data($form_data) {
+        $this->db->insert($this->table_name, $form_data);
     }
 
-    public function update_data($service) {
-        $COLUMN_KEY = 'PaymentTypeColumnConstant';
-        $id = $service->put($COLUMN_KEY::ID);
+    public function update_data($form_data) {
+        $COLUMN_KEY = 'ColumnConstant\PaymentType';
+
+        $id = $form_data[$COLUMN_KEY::ID];
         
-        $reflector = new ReflectionClass($COLUMN_KEY);
-        $constants = $reflector->getConstants();
+        $filtered_form_data = array_filter(array_keys($form_data), fn($x) => ($x !== $COLUMN_KEY::ID));
 
         $data = array();
 
-        foreach($constants as $constant) {
-            if ($constant === $COLUMN_KEY::ID) continue;
+        foreach ($filtered_form_data as $key) { $data[$key] = $form_data[$key]; }
 
-            $data[$constant] = $service->put($constant);
-        }
-
-        $this->db->where('id', $id);
+        $this->db->where($COLUMN_KEY::ID, $id);
         $this->db->update($this->table_name, $data);
     }
 
     public function delete_data($id) {
-        $this->db->where('id', $id);
+        $COLUMN_KEY = 'ColumnConstant\PaymentType';
+
+        $this->db->where($COLUMN_KEY::ID, $id);
         $this->db->delete($this->table_name);
     }
 }

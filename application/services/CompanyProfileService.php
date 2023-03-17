@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once APPPATH . 'constants/ColumnConstant.php';
+
 use chriskacerguis\RestServer\RestController;
 
 class CompanyProfileService extends RestController {
@@ -8,7 +10,7 @@ class CompanyProfileService extends RestController {
     {
         parent::__construct();
 
-        $this->load->helper('form');
+        $this->load->helper('api_service');
         $this->load->library('form_validation');
         $this->load->model('company_profile_model', 'company_profile');
     }
@@ -20,17 +22,18 @@ class CompanyProfileService extends RestController {
     }
 
     public function update_data() {
-        $PARAM_KEY = 'CompanyProfileColumnConstant';
+        $column_constant_keys = get_column_constant_keys_from_class('ColumnConstant\CompanyProfile');
 
-        $reflector = new ReflectionClass($PARAM_KEY);
-        $constants = $reflector->getConstants();
+        $form_data = $this->put();
 
-        $this->form_validation->set_data($this->put());
+        is_form_data_valid($form_data, $column_constant_keys);
 
-        foreach($constants as $constant) { $this->form_validation->set_rules($constant, $constant, 'required'); }
+        $this->form_validation->set_data($form_data);
+
+        foreach($column_constant_keys as $key) { $this->form_validation->set_rules($key, $key, 'required'); }
 
         if ($this->form_validation->run() === FALSE) { throw new Exception(validation_errors_text()); }
 
-        $this->company_profile->update_data($this);
+        $this->company_profile->update_data($form_data);
     }
 }

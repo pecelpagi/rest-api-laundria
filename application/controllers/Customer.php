@@ -17,8 +17,8 @@ class Customer extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$customers = $this->customer_service->get_all_data($this);
-			$total_pages = $this->customer_service->get_total_pages($this);
+			$customers = $this->customer_service->get_all_data();
+			$total_pages = $this->customer_service->get_total_pages();
 
 			$additional_data = [
 				'meta' => [
@@ -37,7 +37,7 @@ class Customer extends CoreController {
 
 		try {
 			$customer = $this->customer_service->create_data();
-			$this->set_successful_response("Create customer success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -48,7 +48,7 @@ class Customer extends CoreController {
 
 		try {
 			$customer = $this->customer_service->update_data();
-			$this->set_successful_response("Update customer success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
@@ -58,10 +58,8 @@ class Customer extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			if (!$key) { throw new Error("Customer ID is required"); }
-
 			$customer = $this->customer_service->delete_data($key);
-			$this->set_successful_response("Delete customer success");
+			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
 		}
