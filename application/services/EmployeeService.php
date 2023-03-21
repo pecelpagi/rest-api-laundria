@@ -42,6 +42,8 @@ class EmployeeService extends RestController {
         
         $this->throw_error_if_login_invalid($username, $passwd);
 
+        $employee = $this->employee->get_one_data_by('username', $username);
+
         return $employee;
     }
 
