@@ -33,7 +33,7 @@ class Laundry_package_model extends CI_model {
         return $query->result();
     }
 
-    public function get_total_all_data($search) {
+    public function get_total_all_data($search = NULL) {
         if ($search) { $this->db->where("LOWER(name) LIKE LOWER('%{$search}%')"); }
 
         return $this->db->count_all_results($this->table_name);

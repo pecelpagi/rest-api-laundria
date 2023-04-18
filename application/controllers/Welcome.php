@@ -52,7 +52,7 @@ class Welcome extends CoreController {
 
 	public function company_profile_get() {
 		try {
-			$data = $this->company_profile_service->get_data();
+			$data = $this->company_profile_service->find_one();
 			$this->set_successful_response($data);
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());

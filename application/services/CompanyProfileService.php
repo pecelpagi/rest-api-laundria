@@ -2,10 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once APPPATH . 'constants/ColumnConstant.php';
+require_once APPPATH . 'service_interfaces/CommonService.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class CompanyProfileService extends RestController {
+class CompanyProfileService extends RestController implements IService\CommonService {
     function __construct()
     {
         parent::__construct();
@@ -15,8 +16,8 @@ class CompanyProfileService extends RestController {
         $this->load->model('company_profile_model', 'company_profile');
     }
 
-    public function get_data() {
-        $data = $this->company_profile->get_one_data($this);
+    public function find_one($id = NULL) {
+        $data = $this->company_profile->get_one_data();
         
         return $data;
     }
@@ -36,4 +37,8 @@ class CompanyProfileService extends RestController {
 
         $this->company_profile->update_data($form_data);
     }
+
+    public function find_all() {}
+    public function insert_data() {}
+    public function delete_data($id) {}
 }

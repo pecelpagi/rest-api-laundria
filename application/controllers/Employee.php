@@ -19,13 +19,17 @@ class Employee extends CoreController {
 		$decoded = $this->jwt_auth_required($this->superadmin_only);
 
 		try {
-			$employee_id = $decoded->data->id;
-			$employees = $this->employee_service->get_all_data_except_id($employee_id, $this);
-			$total_pages = $this->employee_service->get_total_pages($this, $employee_id);
+			$this->employee_service->set_employee_id($decoded->data->id);
+
+			$employees = $this->employee_service->find_all();
+			$number_of_pages = $this->employee_service->count_number_of_pages();
+			$number_of_all_rows = $this->employee_service->count_number_of_all_rows();
 
 			$additional_data = [
 				'meta' => [
-					'total_pages' => $total_pages,
+					'current_number_of_rows' => count($employees),
+					'number_of_pages' => $number_of_pages,
+					'number_of_all_rows' => $number_of_all_rows
 				],
 			];
 
@@ -39,7 +43,7 @@ class Employee extends CoreController {
 		$this->jwt_auth_required($this->superadmin_only);
 
 		try {
-			$employee = $this->employee_service->create_data();
+			$employee = $this->employee_service->insert_data();
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
@@ -99,7 +103,9 @@ class Employee extends CoreController {
 		$decoded = $this->jwt_auth_required();
 		
 		try {
-			$data = $this->employee_service->update_data($decoded->data->id);
+			$this->employee_service->set_employee_id($decoded->data->id);
+			$data = $this->employee_service->update_data();
+
 			$this->set_successful_response($data);
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());

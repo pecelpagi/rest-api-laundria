@@ -17,12 +17,15 @@ class Customer extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$customers = $this->customer_service->get_all_data();
-			$total_pages = $this->customer_service->get_total_pages();
+			$customers = $this->customer_service->find_all();
+			$number_of_pages = $this->customer_service->count_number_of_pages();
+			$number_of_all_rows = $this->customer_service->count_number_of_all_rows();
 
 			$additional_data = [
 				'meta' => [
-					'total_pages' => $total_pages,
+					'current_number_of_rows' => count($customers),
+					'number_of_pages' => $number_of_pages,
+					'number_of_all_rows' => $number_of_all_rows
 				],
 			];
 
@@ -36,7 +39,7 @@ class Customer extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$customer = $this->customer_service->create_data();
+			$this->customer_service->insert_data();
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
@@ -47,7 +50,7 @@ class Customer extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$customer = $this->customer_service->update_data();
+			$this->customer_service->update_data();
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
@@ -58,7 +61,7 @@ class Customer extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$customer = $this->customer_service->delete_data($key);
+			$this->customer_service->delete_data($key);
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());

@@ -17,12 +17,15 @@ class LaundryPackage extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$laundry_packages = $this->laundry_package_service->get_all_data($this);
-			$total_pages = $this->laundry_package_service->get_total_pages($this);
+			$laundry_packages = $this->laundry_package_service->find_all();
+			$number_of_pages = $this->laundry_package_service->count_number_of_pages();
+			$number_of_all_rows = $this->laundry_package_service->count_number_of_all_rows();
 
 			$additional_data = [
 				'meta' => [
-					'total_pages' => $total_pages,
+					'current_number_of_rows' => count($laundry_packages),
+					'number_of_pages' => $number_of_pages,
+					'number_of_all_rows' => $number_of_all_rows
 				],
 			];
 
@@ -36,7 +39,7 @@ class LaundryPackage extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$this->laundry_package_service->create_data();
+			$this->laundry_package_service->insert_data();
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());

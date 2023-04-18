@@ -3,10 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once APPPATH . 'constants/ColumnConstant.php';
 require_once APPPATH . 'constants/CommonConstant.php';
+require_once APPPATH . 'service_interfaces/CommonService.php';
+require_once APPPATH . 'service_interfaces/MetadataService.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class PaymentTypeService extends RestController {
+class PaymentTypeService extends RestController implements IService\CommonService, IService\MetadataService {
 
     function __construct()
     {
@@ -17,7 +19,7 @@ class PaymentTypeService extends RestController {
         $this->load->model('payment_type_model', 'payment_type');
     }
 
-    public function create_data() {
+    public function insert_data() {
         $PARAM_KEY = 'ColumnConstant\PaymentType';
         $column_constant_keys = get_column_constant_keys_from_class($PARAM_KEY);
 
@@ -80,7 +82,7 @@ class PaymentTypeService extends RestController {
         return $retval;
     }
 
-    public function get_all_data() {
+    public function find_all() {
         extract($this->create_limit_offset_data());
         
         $search = $this->get(CommonConstant::SEARCH);
@@ -90,7 +92,9 @@ class PaymentTypeService extends RestController {
         return $data;
     }
 
-    public function get_total_pages() {
+    public function find_one($id = NULL) {}
+
+    public function count_number_of_pages() {
         $PARAM_KEY = 'CommonConstant';
 
         if (!$this->get($PARAM_KEY::LIMIT)) { return 0; }
@@ -101,5 +105,11 @@ class PaymentTypeService extends RestController {
         $total_pages = ceil($total_data / $this->get($PARAM_KEY::LIMIT));
 
         return $total_pages;
+    }
+
+    public function count_number_of_all_rows() {
+        $total_data = $this->payment_type->get_total_all_data();
+        
+        return $total_data;
     }
 }

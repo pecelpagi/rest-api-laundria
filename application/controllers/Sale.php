@@ -15,7 +15,7 @@ class Sale extends CoreController {
 
 	private function get_one_data($id) {
 		try {
-			$sale = $this->sale_service->get_one_data($id);
+			$sale = $this->sale_service->find_one($id);
 
 			$this->set_successful_response($sale);
 		} catch (Throwable $e) {
@@ -29,12 +29,15 @@ class Sale extends CoreController {
 		try {
 			if ($id) { $this->get_one_data($id); }
 
-			$sales = $this->sale_service->get_all_data();
-			$total_pages = $this->sale_service->get_total_pages();
+			$sales = $this->sale_service->find_all();
+			$number_of_pages = $this->sale_service->count_number_of_pages();
+			$number_of_all_rows = $this->sale_service->count_number_of_all_rows();
 
 			$additional_data = [
 				'meta' => [
-					'total_pages' => $total_pages,
+					'current_number_of_rows' => count($sales),
+					'number_of_pages' => $number_of_pages,
+					'number_of_all_rows' => $number_of_all_rows
 				],
 			];
 
@@ -48,7 +51,7 @@ class Sale extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$this->sale_service->create_data();
+			$this->sale_service->insert_data();
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());

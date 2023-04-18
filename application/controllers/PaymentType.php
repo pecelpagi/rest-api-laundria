@@ -17,12 +17,15 @@ class PaymentType extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$payment_types = $this->payment_type_service->get_all_data($this);
-			$total_pages = $this->payment_type_service->get_total_pages($this);
+			$payment_types = $this->payment_type_service->find_all();
+			$number_of_pages = $this->payment_type_service->count_number_of_pages();
+			$number_of_all_rows = $this->payment_type_service->count_number_of_all_rows();
 
 			$additional_data = [
 				'meta' => [
-					'total_pages' => $total_pages,
+					'current_number_of_rows' => count($payment_types),
+					'number_of_pages' => $number_of_pages,
+					'number_of_all_rows' => $number_of_all_rows
 				],
 			];
 
@@ -36,7 +39,7 @@ class PaymentType extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$this->payment_type_service->create_data();
+			$this->payment_type_service->insert_data();
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
