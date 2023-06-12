@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02c64a889cd25781f20c7ad20f2cd840",
+    "content-hash": "e373ed160aae388b30e16d746403695d",
     "packages": [
         {
             "name": "chriskacerguis/codeigniter-restserver",
@@ -406,6 +406,57 @@
                 }
             ],
             "time": "2022-03-03T08:28:38+00:00"
+        },
+        {
+            "name": "kenjis/ci-phpunit-test",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kenjis/ci-phpunit-test.git",
+                "reference": "b4f53e137bc23d5c1bfa6429554825469dfe674c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/b4f53e137bc23d5c1bfa6429554825469dfe674c",
+                "reference": "b4f53e137bc23d5c1bfa6429554825469dfe674c",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.2",
+                "php": ">=7.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kenji Suzuki",
+                    "homepage": "https://github.com/kenjis"
+                }
+            ],
+            "description": "An easier way to use PHPUnit with CodeIgniter 3.x",
+            "homepage": "http://kenjis.github.io/ci-phpunit-test/",
+            "keywords": [
+                "codeigniter",
+                "codeigniter3",
+                "monkey patch",
+                "phpunit",
+                "test",
+                "unit testing"
+            ],
+            "support": {
+                "forum": "http://forum.codeigniter.com/thread-61725.html",
+                "issues": "https://github.com/kenjis/ci-phpunit-test/issues",
+                "source": "https://github.com/kenjis/ci-phpunit-test/tree/v3.0.4"
+            },
+            "time": "2022-12-26T04:22:15+00:00"
         },
         {
             "name": "mikey179/vfsstream",
