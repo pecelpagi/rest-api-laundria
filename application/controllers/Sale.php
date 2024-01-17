@@ -90,4 +90,15 @@ class Sale extends CoreController {
 			$this->set_error_response($e->getMessage());
 		}
 	}
+
+	public function daily_transaction_total_grouped_by_date_get() {
+		$this->jwt_auth_required();
+
+		try {
+			$data = $this->sale_service->get_daily_transaction_total_grouped_by_date();
+			$this->set_successful_response($data);
+		} catch (Throwable $e) {
+			$this->set_error_response($e->getMessage());
+		}
+	}
 }

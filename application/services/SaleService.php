@@ -167,4 +167,17 @@ class SaleService extends RestController implements IService\CommonService, ISer
 
         return $data;
     }
+
+    public function get_daily_transaction_total_grouped_by_date() {
+        $PARAM_KEY = (object)[];
+        $PARAM_KEY->START_DATE = "start_date";
+        $PARAM_KEY->END_DATE = "end_date";
+
+        if (!$this->get($PARAM_KEY->START_DATE)) { throw new Exception("Start date is required"); }
+        if (!$this->get($PARAM_KEY->END_DATE)) { throw new Exception("End date is required"); }
+
+        $data = $this->sale->get_daily_transaction_total_grouped_by_date($this->get($PARAM_KEY->START_DATE), $this->get($PARAM_KEY->END_DATE));
+
+        return $data;
+    }
 }

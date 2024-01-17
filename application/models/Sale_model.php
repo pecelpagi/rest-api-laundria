@@ -15,6 +15,14 @@ class Sale_model extends CI_model {
 		$this->table_name = 'Sales';
 	}
 
+    public function get_daily_transaction_total_grouped_by_date($start_date, $end_date)
+    {
+        $sql = "SELECT COUNT(CAST(created_at as DATE)) as daily_transaction_total, CAST(created_at as DATE) as date_created_at FROM Sales GROUP BY date_created_at HAVING date_created_at >= ? AND date_created_at <= ? ORDER BY date_created_at DESC";
+        $query = $this->db->query($sql, array($start_date, $end_date));
+
+        return $query->result();
+    }
+
     public function get_one_data_by($column, $value)
     {
         $this->db->select('Sales.*, Customers.fullname as customer_name, LaundryPackages.name as laundry_package_name, PaymentTypes.name as payment_type_name');
