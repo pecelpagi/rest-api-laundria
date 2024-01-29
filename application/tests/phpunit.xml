@@ -12,7 +12,6 @@
 	</testsuites>
 	<coverage processUncoveredFiles="true">
 		<include>
-			<directory suffix=".php">../controllers</directory>
 			<directory suffix=".php">../services</directory>
 			<directory suffix=".php">../models</directory>
 			<directory suffix=".php">../views</directory>
@@ -31,4 +30,7 @@
 	<logging>
 		<junit outputFile="build/logs/junit.xml"/>
 	</logging>
+	<php>
+        <env name="DB_DATABASE" value="db_laundria" force="true" />
+    </php>
 </phpunit>

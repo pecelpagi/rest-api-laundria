@@ -12,7 +12,8 @@
 	},
 	"scripts": {
 		"open:coverage": "xdg-open ./application/tests/build/coverage/index.html",
-		"test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit -c application/tests"
+		"open:coverage:mac": "open ./application/tests/build/coverage/index.html",
+		"test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit -c application/tests --verbose"
 	},
 	"require": {
 		"php": "^7.2",

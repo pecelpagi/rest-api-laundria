@@ -22,9 +22,13 @@ class Customer_model extends CI_model {
         return $query->row(0);
     }
 
-    public function get_all_data($limit = NULL, $offset = 0, $search) {
-        if ($search) { $this->db->where("LOWER(fullname) LIKE LOWER('%{$search}%')"); }
-        if ($limit) { $this->db->limit($limit); }
+    public function get_all_data($limit = NULL, $offset = 0, $search = NULL) {
+        if ($search) {
+            $this->db->where("LOWER(fullname) LIKE LOWER('%{$search}%')");
+        }
+        if ($limit) {
+            $this->db->limit($limit);
+        }
     
         $this->db->offset($offset);
 
