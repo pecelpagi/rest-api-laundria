@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="4" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.030289">
+    <testsuite name="CodeIgniter Application Test Suite" tests="4" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.030289">
+      <testsuite name="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" tests="3" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="0.023304">
+        <testcase name="test_get_total_all_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="11" assertions="2" time="0.011946"/>
+        <testcase name="test_get_all_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="20" assertions="4" time="0.006552"/>
+        <testcase name="test_update_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="39" assertions="1" time="0.004806"/>
+      </testsuite>
+      <testsuite name="CustomerService_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/services/CustomerService_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.006985">
+        <testcase name="test_find_all" class="CustomerService_test" classname="CustomerService_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/services/CustomerService_test.php" line="15" assertions="1" time="0.006985"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

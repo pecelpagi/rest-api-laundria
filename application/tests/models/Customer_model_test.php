@@ -35,4 +35,20 @@ class Customer_model_test extends TestCase
         $output = $this->CI->customer->get_all_data($limit, $offset, $search);
         $this->assertEquals(count($output), 0);
     }
+
+    public function test_update_data()
+    {
+        $form_data = array();
+        $form_data['fullname'] = 'Customer Unit Test 2';
+        $form_data['addr'] = 'Jl. Mawar No. 8';
+        $form_data['phone'] = '085645781435';
+        $form_data['id'] = '18';
+        $this->CI->customer->update_data($form_data);
+
+        $search = 'customer unit test 2';
+        $limit = 1;
+        $offset = 0;
+        $output = $this->CI->customer->get_all_data($limit, $offset, $search);
+        $this->assertEquals(count($output), 1);
+    }
 }
