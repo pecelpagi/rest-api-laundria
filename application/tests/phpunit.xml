@@ -31,6 +31,6 @@
 		<junit outputFile="build/logs/junit.xml"/>
 	</logging>
 	<php>
-        <env name="DB_DATABASE" value="db_laundria" force="true" />
+        <env name="DB_DATABASE" value="db_laundria_test" force="true" />
     </php>
 </phpunit>
