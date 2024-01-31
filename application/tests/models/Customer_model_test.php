@@ -11,7 +11,7 @@ class Customer_model_test extends TestCase
     public function test_get_total_all_data()
     {
         $output = $this->CI->customer->get_total_all_data();
-        $this->assertEquals($output, 10); 
+        $this->assertEquals($output, 9); 
 
         $output = $this->CI->customer->get_total_all_data('heri');
         $this->assertEquals($output, 1); 
@@ -20,7 +20,7 @@ class Customer_model_test extends TestCase
     public function test_get_all_data()
     {
         $output = $this->CI->customer->get_all_data();
-        $this->assertEquals(count($output), 10);
+        $this->assertEquals(count($output), 9);
 
         $limit = 5;
         $output = $this->CI->customer->get_all_data($limit);
@@ -50,5 +50,13 @@ class Customer_model_test extends TestCase
         $offset = 0;
         $output = $this->CI->customer->get_all_data($limit, $offset, $search);
         $this->assertEquals(count($output), 1);
+    }
+
+    public function test_delete_data()
+    {
+        $this->CI->customer->delete_data(19);
+
+        $output = $this->CI->customer->get_all_data();
+        $this->assertEquals(count($output), 9);
     }
 }
