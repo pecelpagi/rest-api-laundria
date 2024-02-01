@@ -36,6 +36,22 @@ class Customer_model_test extends TestCase
         $this->assertEquals(count($output), 0);
     }
 
+    public function test_insert_data()
+    {
+        $form_data = array();
+        $form_data['fullname'] = 'Test Add Customer';
+        $form_data['addr'] = '-';
+        $form_data['phone'] = '085645781121';
+        $last_insert_id = $this->CI->customer->insert_data($form_data);
+
+        $output = $this->CI->customer->get_all_data();
+        $this->assertEquals(count($output), 10);
+
+        $this->CI->customer->delete_data($last_insert_id);
+        $output = $this->CI->customer->get_all_data();
+        $this->assertEquals(count($output), 9);
+    }
+
     public function test_update_data()
     {
         $form_data = array();
