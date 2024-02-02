@@ -75,4 +75,11 @@ class Customer_model_test extends TestCase
         $output = $this->CI->customer->get_all_data();
         $this->assertEquals(count($output), 9);
     }
+
+    public function test_get_one_data_by()
+    {
+        $output = $this->CI->customer->get_one_data_by('id', 18);
+
+        $this->assertIsNotBool($output);
+    }
 }
