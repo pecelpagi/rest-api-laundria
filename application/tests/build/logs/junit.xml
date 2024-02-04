@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="5" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.034039">
-    <testsuite name="CodeIgniter Application Test Suite" tests="5" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.034039">
-      <testsuite name="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" tests="4" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.027149">
-        <testcase name="test_get_total_all_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="11" assertions="2" time="0.010991"/>
-        <testcase name="test_get_all_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="20" assertions="4" time="0.006865"/>
-        <testcase name="test_update_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="39" assertions="1" time="0.004877"/>
-        <testcase name="test_delete_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="55" assertions="1" time="0.004416"/>
+  <testsuite name="" tests="9" assertions="18" errors="0" warnings="0" failures="0" skipped="0" time="0.056651">
+    <testsuite name="CodeIgniter Application Test Suite" tests="9" assertions="18" errors="0" warnings="0" failures="0" skipped="0" time="0.056651">
+      <testsuite name="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" tests="6" assertions="11" errors="0" warnings="0" failures="0" skipped="0" time="0.039687">
+        <testcase name="test_get_total_all_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="11" assertions="2" time="0.011457"/>
+        <testcase name="test_get_all_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="20" assertions="4" time="0.006601"/>
+        <testcase name="test_insert_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="39" assertions="2" time="0.008746"/>
+        <testcase name="test_update_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="55" assertions="1" time="0.004622"/>
+        <testcase name="test_delete_data" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="71" assertions="1" time="0.004151"/>
+        <testcase name="test_get_one_data_by" class="Customer_model_test" classname="Customer_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Customer_model_test.php" line="79" assertions="1" time="0.004110"/>
       </testsuite>
-      <testsuite name="CustomerService_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/services/CustomerService_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.006890">
-        <testcase name="test_find_all" class="CustomerService_test" classname="CustomerService_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/services/CustomerService_test.php" line="15" assertions="1" time="0.006890"/>
+      <testsuite name="Laundry_package_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Laundry_package_model_test.php" tests="2" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.009867">
+        <testcase name="test_get_all_data" class="Laundry_package_model_test" classname="Laundry_package_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Laundry_package_model_test.php" line="11" assertions="4" time="0.005314"/>
+        <testcase name="test_get_one_data_by" class="Laundry_package_model_test" classname="Laundry_package_model_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/models/Laundry_package_model_test.php" line="30" assertions="2" time="0.004553"/>
+      </testsuite>
+      <testsuite name="CustomerService_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/services/CustomerService_test.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.007097">
+        <testcase name="test_find_all" class="CustomerService_test" classname="CustomerService_test" file="/Users/galuhramadhan/personal_projects/rest-api-laundria/application/tests/services/CustomerService_test.php" line="15" assertions="1" time="0.007097"/>
       </testsuite>
     </testsuite>
   </testsuite>

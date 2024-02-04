@@ -26,4 +26,15 @@ class Laundry_package_model_test extends TestCase
         $output = $this->CI->laundry_package->get_all_data($limit, $offset, $search);
         $this->assertEquals(count($output), 0);
     }
+
+    public function test_get_one_data_by()
+    {
+        $output = $this->CI->laundry_package->get_one_data_by('id', 2);
+
+        $this->assertIsNotBool($output);
+
+        $output = $this->CI->laundry_package->get_one_data_by('id', 666);
+
+        $this->assertIsBool($output);
+    }
 }
