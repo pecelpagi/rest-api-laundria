@@ -8,6 +8,15 @@ class Laundry_package_model_test extends TestCase
         $this->CI->load->model('laundry_package_model', 'laundry_package');
     }
 
+    public function test_get_total_all_data()
+    {
+        $output = $this->CI->laundry_package->get_total_all_data();
+        $this->assertEquals($output, 2); 
+
+        $output = $this->CI->laundry_package->get_total_all_data('setrika');
+        $this->assertEquals($output, 1); 
+    }
+
     public function test_get_all_data()
     {
         $output = $this->CI->laundry_package->get_all_data();
