@@ -46,4 +46,19 @@ class Laundry_package_model_test extends TestCase
 
         $this->assertIsBool($output);
     }
+
+    public function test_insert_data()
+    {
+        $form_data = array();
+        $form_data['name'] = 'unit test';
+        $form_data['price'] = '1000';
+        $last_insert_id = $this->CI->laundry_package->insert_data($form_data);
+
+        $output = $this->CI->laundry_package->get_all_data();
+        $this->assertEquals(count($output), 3);
+
+        $this->CI->laundry_package->delete_data($last_insert_id);
+        $output = $this->CI->laundry_package->get_all_data();
+        $this->assertEquals(count($output), 2);
+    }
 }
