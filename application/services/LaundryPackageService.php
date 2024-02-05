@@ -19,11 +19,9 @@ class LaundryPackageService extends RestController implements IService\CommonSer
         $this->load->model('laundry_package_model', 'laundry_package');
     }
 
-    public function insert_data() {
+    public function insert_data($form_data) {
         $PARAM_KEY = 'ColumnConstant\LaundryPackage';
         $column_constant_keys = get_column_constant_keys_from_class($PARAM_KEY);
-
-        $form_data = $this->post();
 
         is_form_data_valid($form_data, $column_constant_keys);
 

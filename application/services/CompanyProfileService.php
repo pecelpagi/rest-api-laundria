@@ -39,6 +39,6 @@ class CompanyProfileService extends RestController implements IService\CommonSer
     }
 
     public function find_all() {}
-    public function insert_data() {}
+    public function insert_data($form_data) {}
     public function delete_data($id) {}
 }

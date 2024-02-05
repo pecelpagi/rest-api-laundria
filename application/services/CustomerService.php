@@ -19,11 +19,9 @@ class CustomerService extends RestController implements IService\CommonService, 
         $this->load->model('customer_model', 'customer');
     }
 
-    public function insert_data() {
+    public function insert_data($form_data) {
         $PARAM_KEY = 'ColumnConstant\Customer';
         $column_constant_keys = get_column_constant_keys_from_class($PARAM_KEY);
-
-        $form_data = $this->post();
 
         is_form_data_valid($form_data, $column_constant_keys);
 

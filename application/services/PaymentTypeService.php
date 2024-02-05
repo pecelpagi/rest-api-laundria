@@ -19,11 +19,9 @@ class PaymentTypeService extends RestController implements IService\CommonServic
         $this->load->model('payment_type_model', 'payment_type');
     }
 
-    public function insert_data() {
+    public function insert_data($form_data) {
         $PARAM_KEY = 'ColumnConstant\PaymentType';
         $column_constant_keys = get_column_constant_keys_from_class($PARAM_KEY);
-
-        $form_data = $this->post();
 
         is_form_data_valid($form_data, $column_constant_keys);
 

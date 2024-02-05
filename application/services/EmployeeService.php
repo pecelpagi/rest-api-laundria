@@ -147,12 +147,10 @@ implements IService\CommonService, IService\MetadataService, IService\EmployeeSe
 
     public function find_one($id = NULL) {}
 
-    public function insert_data() {
+    public function insert_data($form_data) {
         $PARAM_KEY = 'ColumnConstant\Employee';
 
         $column_constant_keys = get_column_constant_keys_from_class($PARAM_KEY);
-
-        $form_data = $this->post();
 
         is_form_data_valid($form_data, $column_constant_keys);
 

@@ -41,11 +41,9 @@ class SaleService extends RestController implements IService\CommonService, ISer
         if (!$payment_type) { throw new Exception("Payment type with ID: {$payment_type_id} is not found"); }
     }
 
-    public function insert_data() {
+    public function insert_data($form_data) {
         $PARAM_KEY = 'ColumnConstant\Sale';
         $column_constant_keys = get_column_constant_keys_from_class($PARAM_KEY);
-
-        $form_data = $this->post();
 
         is_form_data_valid($form_data, $column_constant_keys);
 
