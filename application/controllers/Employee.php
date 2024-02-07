@@ -43,7 +43,8 @@ class Employee extends CoreController {
 		$this->jwt_auth_required($this->superadmin_only);
 
 		try {
-			$employee = $this->employee_service->insert_data();
+			$form_data = $this->post();
+			$employee = $this->employee_service->insert_data($form_data);
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());

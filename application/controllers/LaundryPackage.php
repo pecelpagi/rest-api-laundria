@@ -39,7 +39,8 @@ class LaundryPackage extends CoreController {
 		$this->jwt_auth_required();
 
 		try {
-			$this->laundry_package_service->insert_data();
+			$form_data = $this->post();
+			$this->laundry_package_service->insert_data($form_data);
 			$this->set_successful_response("OK");
 		} catch (Throwable $e) {
 			$this->set_error_response($e->getMessage());
