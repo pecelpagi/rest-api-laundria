@@ -16,4 +16,23 @@ class Payment_type_model_test extends TestCase
         $output = $this->CI->payment_type->get_total_all_data('piutang');
         $this->assertEquals($output, 1); 
     }
+
+    public function test_get_all_data()
+    {
+        $output = $this->CI->payment_type->get_all_data();
+        $this->assertEquals(count($output), 4);
+
+        $limit = 5;
+        $output = $this->CI->payment_type->get_all_data($limit);
+        $this->assertEquals(count($output), 4);
+        
+        $search = 'piutang';
+        $offset = 0;
+        $output = $this->CI->payment_type->get_all_data($limit, $offset, $search);
+        $this->assertEquals(count($output), 1);
+        
+        $offset = 1;
+        $output = $this->CI->payment_type->get_all_data($limit, $offset, $search);
+        $this->assertEquals(count($output), 0);
+    }
 }
