@@ -61,4 +61,24 @@ class Payment_type_model_test extends TestCase
         $this->assertEquals(count($output), 4);
     }
 
+    public function test_update_data()
+    {
+        $form_data = array();
+        $form_data['name'] = 'unit test';
+        $last_insert_id = $this->CI->payment_type->insert_data($form_data);
+
+        $form_data = array();
+        $form_data['name'] = 'update unit test';
+        $form_data['id'] = $last_insert_id;
+        $this->CI->payment_type->update_data($form_data);
+
+        $search = 'update unit test';
+        $limit = 1;
+        $offset = 0;
+        $output = $this->CI->payment_type->get_all_data($limit, $offset, $search);
+        $this->assertEquals(count($output), 1);
+
+        $this->CI->payment_type->delete_data($last_insert_id);
+    }
+
 }
