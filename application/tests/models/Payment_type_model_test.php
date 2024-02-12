@@ -35,4 +35,16 @@ class Payment_type_model_test extends TestCase
         $output = $this->CI->payment_type->get_all_data($limit, $offset, $search);
         $this->assertEquals(count($output), 0);
     }
+
+    public function test_get_one_data_by()
+    {
+        $output = $this->CI->payment_type->get_one_data_by('id', 3);
+
+        $this->assertIsNotBool($output);
+
+        $output = $this->CI->payment_type->get_one_data_by('id', 666);
+
+        $this->assertIsBool($output);
+    }
+
 }
