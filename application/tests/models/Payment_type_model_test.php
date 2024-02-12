@@ -47,4 +47,18 @@ class Payment_type_model_test extends TestCase
         $this->assertIsBool($output);
     }
 
+    public function test_insert_data()
+    {
+        $form_data = array();
+        $form_data['name'] = 'unit test';
+        $last_insert_id = $this->CI->payment_type->insert_data($form_data);
+
+        $output = $this->CI->payment_type->get_all_data();
+        $this->assertEquals(count($output), 5);
+
+        $this->CI->payment_type->delete_data($last_insert_id);
+        $output = $this->CI->payment_type->get_all_data();
+        $this->assertEquals(count($output), 4);
+    }
+
 }

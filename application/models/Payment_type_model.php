@@ -41,6 +41,10 @@ class Payment_type_model extends CI_model {
 
     public function insert_data($form_data) {
         $this->db->insert($this->table_name, $form_data);
+
+        $insert_id = $this->db->insert_id();
+
+        return  $insert_id;
     }
 
     public function update_data($form_data) {
