@@ -29,6 +29,10 @@ class Employee_model extends CI_Model {
         $form_data[$COLUMN_KEY::ROLE] = 2;
 
         $this->db->insert($this->table_name, $form_data);
+
+        $insert_id = $this->db->insert_id();
+
+        return  $insert_id;
     }
 
     public function update_data($form_data) {
