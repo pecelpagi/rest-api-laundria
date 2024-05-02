@@ -14,6 +14,4 @@ COPY . .
 
 RUN composer install
 
-RUN mv .env.example .env
-
 CMD [ "php", "-S", "0.0.0.0:80", "./index.php" ]
